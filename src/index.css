@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Archivo", "IBM Plex Sans", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-canvas: #edf1f7;
+  --color-ink-950: #050e20;
+  --color-ink-900: #0a1830;
+  --color-ink-850: #0d1e3a;
+  --color-ink-800: #122544;
+  --color-ink-700: #1b3358;
+  --color-ink-600: #29466f;
+  --color-ink-500: #3d5c88;
+  --color-ink-400: #6b84a8;
+  --color-ink-300: #9fb2cc;
+  --color-ink-200: #c6d3e5;
+  --color-ink-100: #dfe7f1;
+  --color-ink-50: #f0f4f9;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dce8ff;
+  --color-brand-200: #b9cfff;
+  --color-brand-300: #8fb0fd;
+  --color-brand-400: #5f88f5;
+  --color-brand-500: #3465e8;
+  --color-brand-600: #2251cf;
+  --color-brand-700: #1c41a8;
+  --color-brand-800: #173583;
+  --color-brand-900: #132b66;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-canvas);
+  color: #24324a;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+/* layered ambient canvas */
+.app-canvas {
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(52, 101, 232, 0.07), transparent 60%),
+    radial-gradient(900px 420px at -10% 30%, rgba(23, 53, 131, 0.05), transparent 55%),
+    var(--color-canvas);
+}
+
+.sidebar-surface {
+  background:
+    radial-gradient(420px 260px at 110% 0%, rgba(79, 131, 241, 0.16), transparent 60%),
+    radial-gradient(380px 300px at -20% 100%, rgba(79, 131, 241, 0.08), transparent 55%),
+    linear-gradient(180deg, #0b1b36 0%, #0a1830 55%, #081428 100%);
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(159, 178, 204, 0.35) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #dde5f0;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(16, 35, 68, 0.05), 0 4px 14px -8px rgba(16, 35, 68, 0.08);
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #c9d5e6;
+  border-radius: 7px;
+  background: #fff;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: #24324a;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:focus {
+  border-color: #3465e8;
+  box-shadow: 0 0 0 3px rgba(52, 101, 232, 0.14);
+}
+.input::placeholder { color: #93a5bf; }
+
+.label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5d7091;
+  margin-bottom: 4px;
+}
+
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: #c3cfe0; border-radius: 8px; }
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 101, 232, 0.45); }
+  60% { box-shadow: 0 0 0 6px rgba(52, 101, 232, 0); }
+}
+.anim-fade-up { animation: fadeUp 0.35s ease both; }
+.anim-slide-in { animation: slideInRight 0.25s ease both; }
+.anim-scale-in { animation: scaleIn 0.18s ease both; }
+.pulse-dot { animation: pulseDot 1.8s ease infinite; }
+
+.stagger > * { animation: fadeUp 0.4s ease both; }
+.stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.stagger > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.stagger > *:nth-child(6) { animation-delay: 0.22s; }
+.stagger > *:nth-child(7) { animation-delay: 0.26s; }
+.stagger > *:nth-child(8) { animation-delay: 0.3s; }
+
+@media print {
+  @page { margin: 12mm; }
+  body { background: #fff !important; font-size: 11px; }
+  .print-hidden { display: none !important; }
+  .print-block {
+    display: block !important;
+    position: static !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .card { box-shadow: none !important; break-inside: avoid; }
+  .print-break { break-before: page; }
+}
